@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ data.profile.name }} | {{ data.profile.role }}</title>
+    <meta name="description" content="Portfolio of Bindhu Shree K.R — Backend Developer and Machine Learning Enthusiast based in Bangalore, Karnataka. Specializing in Python, RESTful APIs, Cloud, and NLP.">
+    <meta name="keywords" content="Bindhu Shree K.R, Backend Developer, Machine Learning, Python, Flask, AWS, SQL, Bangalore, Portfolio">
+    <meta name="author" content="Bindhu Shree K.R">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ data.profile.name }} — Portfolio">
+    <meta property="og:description" content="{{ data.profile.short_bio }}">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <!-- Favicon (SVG data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f172a'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='42' fill='%2338bdf8'>BS</text></svg>">
+</head>
+<body>
+    <!-- Background Animated Gradient Mesh and Circuit Grid -->
+    <div class="bg-grid-pattern" aria-hidden="true"></div>
+    <div class="ambient-glow glow-1" aria-hidden="true"></div>
+    <div class="ambient-glow glow-2" aria-hidden="true"></div>
+    <div class="ambient-glow glow-3" aria-hidden="true"></div>
+
+    <!-- Navigation Header -->
+    <header class="site-header" id="site-header">
+        <div class="container nav-container">
+            <a href="#hero" class="brand-logo" aria-label="Bindhu Shree K.R Homepage">
+                <span class="logo-symbol">&lt;BS/&gt;</span>
+                <span class="logo-text">Bindhu Shree <span class="accent-text">K.R</span></span>
+            </a>
+
+            <nav class="main-nav" id="main-nav" aria-label="Main Navigation">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                    <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                    <li><a href="#leadership" class="nav-link">Leadership</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="{{ url_for('download_resume') }}" class="btn btn-sm btn-outline-cyan" id="nav-resume-btn" download>
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Resume</span>
+                </a>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="main-nav">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- 1. Hero Section -->
+        <section class="section hero-section" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-content reveal-item">
+                    <div class="hero-header-badge-row">
+                        <div class="hero-avatar-wrap">
+                            <img src="{{ url_for('static', filename='profile.jpg') }}" alt="{{ data.profile.name }} Portrait" class="hero-avatar-img">
+                            <span class="hero-avatar-status" title="Available for hire"></span>
+                        </div>
+                        <div class="status-badge">
+                            <span class="status-dot"></span>
+                            <span>Available for Opportunities &bull; Bangalore, KA</span>
+                        </div>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="gradient-text">{{ data.profile.name }}</span>
+                    </h1>
+                    
+                    <h2 class="hero-subtitle">
+                        <span class="code-bracket">&lt;</span>{{ data.profile.role }}<span class="code-bracket">/&gt;</span>
+                    </h2>
+
+                    <p class="hero-description">
+                        {{ data.profile.short_bio }} Currently interning at <strong class="text-white">AES Company</strong> and pursuing Information Science Engineering at <strong class="text-white">Gopalan College of Engineering & Management (VTU)</strong>.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="#projects" class="btn btn-primary" id="hero-work-btn">
+                            <span>View My Work</span>
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary" id="hero-contact-btn">
+                            <span>Contact Me</span>
+                        </a>
+                        <a href="{{ url_for('download_resume') }}" class="btn btn-glass" id="hero-resume-btn" download>
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-quick-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">&gt;_</span>
+                            <span class="meta-text">Python &bull; Java &bull; SQL &bull; REST</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">&#9729;</span>
+                            <span class="meta-text">AWS S3 &bull; DynamoDB &bull; API Gateway</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">&#9889;</span>
+                            <span class="meta-text">ML &bull; NLP &bull; Deep Learning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abstract CSS Technology & Code Graphic -->
+                <div class="hero-visual reveal-item" aria-label="Abstract interactive tech graphic">
+                    <div class="tech-card-wrapper">
+                        <div class="tech-floating-pill pill-top">
+                            <span class="pill-badge pill-green">STATUS: ACTIVE</span>
+                            <span class="pill-text">REST API v2.4 🟢</span>
+                        </div>
+                        
+                        <div class="tech-terminal-card">
+                            <div class="terminal-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <div class="terminal-title">bindhu_engineer.py</div>
+                                <div class="terminal-lang">Python 3.12</div>
+                            </div>
+                            
+                            <div class="terminal-body">
+                                <div class="code-line"><span class="line-no">01</span><span class="token-keyword">class</span> <span class="token-class">BackendMLEngineer</span>:</div>
+                                <div class="code-line"><span class="line-no">02</span>    <span class="token-keyword">def</span> <span class="token-func">__init__</span>(<span class="token-param">self</span>):</div>
+                                <div class="code-line"><span class="line-no">03</span>        <span class="token-param">self</span>.name = <span class="token-string">"Bindhu Shree K.R"</span></div>
+                                <div class="code-line"><span class="line-no">04</span>        <span class="token-param">self</span>.location = <span class="token-string">"Bangalore, India"</span></div>
+                                <div class="code-line"><span class="line-no">05</span>        <span class="token-param">self</span>.stack = [<span class="token-string">"Python"</span>, <span class="token-string">"SQL"</span>, <span class="token-string">"AWS"</span>, <span class="token-string">"NLP"</span>]</div>
+                                <div class="code-line"><span class="line-no">06</span>        <span class="token-param">self</span>.internship = <span class="token-string">"AES Company"</span></div>
+                                <div class="code-line"><span class="line-no">07</span></div>
+                                <div class="code-line"><span class="line-no">08</span>    <span class="token-keyword">def</span> <span class="token-func">build_impactful_systems</span>(<span class="token-param">self</span>):</div>
+                                <div class="code-line"><span class="line-no">09</span>        <span class="token-keyword">return</span> {</div>
+                                <div class="code-line"><span class="line-no">10</span>            <span class="token-string">"scalability"</span>: <span class="token-bool">True</span>,</div>
+                                <div class="code-line"><span class="line-no">11</span>            <span class="token-string">"intelligent_ai"</span>: <span class="token-bool">True</span>,</div>
+                                <div class="code-line"><span class="line-no">12</span>            <span class="token-string">"eager_to_learn"</span>: <span class="token-number">100</span>%</div>
+                                <div class="code-line"><span class="line-no">13</span>        }</div>
+                                <div class="code-line live-execution">
+                                    <span class="prompt-arrow">&gt;&gt;&gt;</span> <span class="typing-text">engineer.build_impactful_systems()</span>
+                                </div>
+                                <div class="code-output">
+                                    <span class="output-success">&#10003; 200 OK — Ready to deploy real-world solutions.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tech-floating-pill pill-bottom">
+                            <span class="pill-badge pill-purple">NLP &amp; ML</span>
+                            <span class="pill-text">AI Diagnostic Engine &bull; 99.4% Uptime</span>
+                        </div>
+
+                        <div class="tech-stats-glass">
+                            <div class="stat-mini">
+                                <span class="stat-mini-num">7.65</span>
+                                <span class="stat-mini-label">CGPA (B.E)</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-mini">
+                                <span class="stat-mini-num">8+</span>
+                                <span class="stat-mini-label">Certifications</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-mini">
+                                <span class="stat-mini-num">3x</span>
+                                <span class="stat-mini-label">Class Rep</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. About Section -->
+        <section class="section about-section" id="about">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">01. Overview</span>
+                    <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card-main glass-panel reveal-item">
+                        <h3 class="about-headline">{{ data.about.headline }}</h3>
+                        {% for paragraph in data.about.paragraphs %}
+                        <p class="about-text">{{ paragraph }}</p>
+                        {% endfor %}
+
+                        <div class="about-philosophy">
+                            <div class="philosophy-item">
+                                <div class="phi-icon">⚙️</div>
+                                <div>
+                                    <h4 class="phi-title">Robust Backend Engineering</h4>
+                                    <p class="phi-desc">Architecting maintainable APIs, structured relational schemas, and fast database queries.</p>
+                                </div>
+                            </div>
+                            <div class="philosophy-item">
+                                <div class="phi-icon">🧠</div>
+                                <div>
+                                    <h4 class="phi-title">Intelligent ML &amp; NLP</h4>
+                                    <p class="phi-desc">Harnessing data science pipelines, sentiment analysis, and conversational AI models.</p>
+                                </div>
+                            </div>
+                            <div class="philosophy-item">
+                                <div class="phi-icon">☁️</div>
+                                <div>
+                                    <h4 class="phi-title">Modern Cloud Systems</h4>
+                                    <p class="phi-desc">Utilizing AWS serverless tools, object storage (S3), and DynamoDB for modern software scale.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-stats-grid reveal-item">
+                        <div class="about-photo-card glass-panel">
+                            <div class="photo-frame">
+                                <img src="{{ url_for('static', filename='profile.jpg') }}" alt="{{ data.profile.name }}" class="about-portrait-img">
+                                <div class="photo-overlay-badge">
+                                    <span class="photo-dot"></span>
+                                    <span>Backend &amp; ML Engineer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% for highlight in data.about.highlights %}
+                        <div class="stat-card glass-panel">
+                            <span class="stat-label">{{ highlight.label }}</span>
+                            <span class="stat-value">{{ highlight.value }}</span>
+                        </div>
+                        {% endfor %}
+
+                        <div class="contact-quick-card glass-panel">
+                            <h4 class="card-mini-title">Connect Directly</h4>
+                            <div class="quick-contact-list">
+                                <a href="mailto:{{ data.profile.email }}" class="qc-link">
+                                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <span>{{ data.profile.email }}</span>
+                                </a>
+                                <a href="tel:{{ data.profile.phone }}" class="qc-link">
+                                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <span>+91 {{ data.profile.phone }}</span>
+                                </a>
+                                <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="qc-link">
+                                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    <span>LinkedIn Profile</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section -->
+        <section class="section skills-section" id="skills">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">02. Expertise</span>
+                    <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
+                    <p class="section-subtitle">A curated breakdown of my programming languages, frameworks, cloud services, and tools.</p>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="skills-grid">
+                    {% for category, skill_list in data.skills.items() %}
+                    <div class="skill-category-card glass-panel reveal-item">
+                        <div class="category-header">
+                            <span class="category-indicator"></span>
+                            <h3 class="category-title">{{ category }}</h3>
+                        </div>
+                        <div class="skill-badges-container">
+                            {% for skill in skill_list %}
+                            <div class="skill-badge-item">
+                                <div class="skill-badge-info">
+                                    <span class="skill-name">{{ skill.name }}</span>
+                                </div>
+                                <div class="skill-meter" aria-hidden="true">
+                                    <div class="skill-fill" style="width: {{ skill.level }}%;"></div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Experience Section -->
+        <section class="section experience-section" id="experience">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">03. Career</span>
+                    <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
+                    <p class="section-subtitle">Real-world production engineering and internship experience.</p>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="timeline-wrapper">
+                    {% for exp in data.experience %}
+                    <div class="timeline-card glass-panel reveal-item">
+                        <div class="timeline-marker">
+                            <div class="marker-dot"></div>
+                            <div class="marker-line"></div>
+                        </div>
+                        
+                        <div class="timeline-content">
+                            <div class="timeline-header-row">
+                                <div>
+                                    <span class="experience-status-tag">{{ exp.status }}</span>
+                                    <h3 class="exp-role">{{ exp.role }}</h3>
+                                    <h4 class="exp-company">{{ exp.company }} &bull; <span class="exp-loc">{{ exp.location }}</span></h4>
+                                </div>
+                                <div class="exp-badge-pill">
+                                    <span>{{ exp.period }}</span>
+                                </div>
+                            </div>
+
+                            <h5 class="resp-heading">Key Responsibilities &amp; Impact:</h5>
+                            <ul class="exp-responsibilities">
+                                {% for item in exp.responsibilities %}
+                                <li>
+                                    <span class="check-icon">&#10003;</span>
+                                    <span>{{ item }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                            <div class="exp-tech-tags">
+                                {% for tech in exp.technologies %}
+                                <span class="tech-pill">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Projects Section -->
+        <section class="section projects-section" id="projects">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">04. Portfolio</span>
+                    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                    <p class="section-subtitle">Showcase of machine learning systems, smart ideathons, and web architectures.</p>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="projects-grid">
+                    {% for project in data.projects %}
+                    <article class="project-card glass-panel reveal-item" id="project-{{ loop.index }}">
+                        <div class="project-card-header">
+                            <div class="project-badge-row">
+                                <span class="project-tag">{{ project.badge }}</span>
+                                <span class="project-status">{{ project.status }}</span>
+                            </div>
+                            <h3 class="project-title">{{ project.title }}</h3>
+                            {% if project.event %}
+                            <div class="project-event">
+                                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                                <span>{{ project.event }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <p class="project-description">{{ project.description }}</p>
+
+                        <div class="project-highlights-box">
+                            <h4 class="highlights-title">Core Innovations:</h4>
+                            <ul class="highlights-list">
+                                {% for highlight in project.highlights %}
+                                <li>
+                                    <span class="bullet-glow">&bull;</span>
+                                    <span>{{ highlight }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="project-tech-footer">
+                            <h4 class="tech-stack-label">Technologies Used:</h4>
+                            <div class="tech-tags-group">
+                                {% for tech in project.technologies %}
+                                <span class="tech-tag">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Education Section -->
+        <section class="section education-section" id="education">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">05. Academic</span>
+                    <h2 class="section-title">Education <span class="gradient-text">Journey</span></h2>
+                    <p class="section-subtitle">Academic foundations in Information Science &amp; Engineering.</p>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="education-grid">
+                    {% for edu in data.education %}
+                    <div class="education-card glass-panel reveal-item">
+                        <div class="edu-card-top">
+                            <div class="edu-score-badge">
+                                <span class="score-type">{{ edu.score_type }}</span>
+                                <span class="score-val">{{ edu.score }}</span>
+                            </div>
+                            <span class="edu-period">{{ edu.period }}</span>
+                        </div>
+
+                        <h3 class="edu-degree">{{ edu.degree }}</h3>
+                        <h4 class="edu-institution">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                            <span>{{ edu.institution }}</span>
+                        </h4>
+
+                        <p class="edu-desc">{{ edu.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Certifications Section -->
+        <section class="section certifications-section" id="certifications">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">06. Credentials</span>
+                    <h2 class="section-title">Professional <span class="gradient-text">Certifications</span></h2>
+                    <p class="section-subtitle">Industry-recognized credentials in Cloud Architecture, AI, and Core Computing.</p>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="certifications-grid">
+                    {% for cert in data.certifications %}
+                    <div class="cert-card glass-panel reveal-item">
+                        <div class="cert-card-header">
+                            <div class="cert-icon-wrapper cert-icon-{{ cert.icon }}">
+                                {% if cert.icon == 'aws' %}
+                                <span class="cert-symbol">AWS</span>
+                                {% elif cert.icon == 'ibm' %}
+                                <span class="cert-symbol">IBM</span>
+                                {% elif cert.icon == 'infosys' %}
+                                <span class="cert-symbol">INF</span>
+                                {% else %}
+                                <span class="cert-symbol">CRT</span>
+                                {% endif %}
+                            </div>
+                            <span class="cert-category-pill">{{ cert.category }}</span>
+                        </div>
+
+                        <h3 class="cert-title">{{ cert.title }}</h3>
+                        <div class="cert-issuer">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <span>{{ cert.issuer }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Leadership Section -->
+        <section class="section leadership-section" id="leadership">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">07. Teamwork</span>
+                    <h2 class="section-title">Leadership &amp; <span class="gradient-text">Initiatives</span></h2>
+                    <p class="section-subtitle">Demonstrated ownership, communication, planning, and collaborative impact.</p>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="leadership-grid">
+                    {% for lead in data.leadership %}
+                    <div class="leadership-card glass-panel reveal-item">
+                        <div class="leadership-header">
+                            <div class="lead-avatar">
+                                <span>&#128081;</span>
+                            </div>
+                            <div>
+                                <span class="lead-tenure">{{ lead.tenure }}</span>
+                                <h3 class="lead-role">{{ lead.role }}</h3>
+                                <h4 class="lead-org">{{ lead.organization }}</h4>
+                            </div>
+                        </div>
+
+                        <p class="lead-description">{{ lead.description }}</p>
+
+                        <div class="lead-skills-wrapper">
+                            <h4 class="lead-skills-title">Key Competencies:</h4>
+                            <div class="lead-skills-tags">
+                                {% for s in lead.skills %}
+                                <span class="lead-tag">{{ s }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Contact Section -->
+        <section class="section contact-section" id="contact">
+            <div class="container">
+                <div class="section-header reveal-item">
+                    <span class="section-tag">08. Reach Out</span>
+                    <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+                    <p class="section-subtitle">Interested in collaborating or discussing backend &amp; machine learning roles? Let's connect!</p>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="contact-grid">
+                    <!-- Contact Information Cards -->
+                    <div class="contact-info-col reveal-item">
+                        <div class="contact-cards-stack">
+                            <div class="info-card glass-panel">
+                                <div class="info-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                </div>
+                                <div class="info-body">
+                                    <span class="info-label">Email Address</span>
+                                    <a href="mailto:{{ data.profile.email }}" class="info-value">{{ data.profile.email }}</a>
+                                </div>
+                            </div>
+
+                            <div class="info-card glass-panel">
+                                <div class="info-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </div>
+                                <div class="info-body">
+                                    <span class="info-label">Phone / WhatsApp</span>
+                                    <a href="tel:{{ data.profile.phone }}" class="info-value">+91 {{ data.profile.phone }}</a>
+                                </div>
+                            </div>
+
+                            <div class="info-card glass-panel">
+                                <div class="info-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                </div>
+                                <div class="info-body">
+                                    <span class="info-label">Location</span>
+                                    <span class="info-value">{{ data.profile.location }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-card glass-panel">
+                                <div class="info-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </div>
+                                <div class="info-body">
+                                    <span class="info-label">LinkedIn Profile</span>
+                                    <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="info-value">linkedin.com/in/bindhu-shree-k-r</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive AJAX Contact Form -->
+                    <div class="contact-form-col reveal-item">
+                        <div class="form-container glass-panel">
+                            <h3 class="form-title">Send a Message</h3>
+                            <p class="form-subtitle">Fill out the form below and I'll respond as soon as possible.</p>
+
+                            <!-- Live Feedback Alert Banner -->
+                            <div id="form-alert" class="alert-banner" style="display: none;" role="alert">
+                                <span class="alert-icon" id="alert-icon"></span>
+                                <span class="alert-message" id="alert-message"></span>
+                            </div>
+
+                            <form id="contact-form" action="{{ url_for('contact') }}" method="POST" novalidate>
+                                <div class="form-group">
+                                    <label for="contact-name" class="form-label">Your Full Name <span class="req">*</span></label>
+                                    <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Johnson" required autocomplete="name">
+                                    <span class="field-error" id="name-error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-email" class="form-label">Email Address <span class="req">*</span></label>
+                                    <input type="email" id="contact-email" name="email" class="form-input" placeholder="e.g. alex@example.com" required autocomplete="email">
+                                    <span class="field-error" id="email-error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-subject" class="form-label">Subject</label>
+                                    <input type="text" id="contact-subject" name="subject" class="form-input" placeholder="e.g. Backend Internship Opportunity / Project Collaboration">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-message" class="form-label">Your Message <span class="req">*</span></label>
+                                    <textarea id="contact-message" name="message" rows="5" class="form-textarea" placeholder="Hello Bindhu, I'd like to discuss..." required></textarea>
+                                    <span class="field-error" id="message-error"></span>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block" id="contact-submit-btn">
+                                    <span class="btn-text">Send Message</span>
+                                    <svg class="btn-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                                        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                                        <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="0.9"></path>
+                                    </svg>
+                                    <svg class="icon btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="logo-symbol">&lt;BS/&gt;</span>
+                    <span class="footer-name">{{ data.profile.name }}</span>
+                    <p class="footer-tagline">{{ data.profile.role }} &bull; Bangalore, Karnataka</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#hero">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#education">Education</a>
+                    <a href="#contact">Contact</a>
+                    <a href="{{ url_for('download_resume') }}">Download Resume</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bindhu Shree K.R. All rights reserved.</p>
+                <p class="footer-tech">Engineered with Python Flask &bull; Modern CSS3 &bull; Semantic HTML5</p>
+                <a href="#hero" class="back-to-top" id="back-to-top" aria-label="Back to top">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vanilla JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
