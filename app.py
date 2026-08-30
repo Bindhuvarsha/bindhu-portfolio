@@ -5,11 +5,13 @@ from flask import Flask, render_template, request, jsonify, send_from_directory
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'bindhu-portfolio-secret-key-2026')
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # Ensure profile photo exists in static directory
-_src_img = r'C:\Users\Bindhu Shree KR\.gemini\antigravity-ide\brain\1a2ce856-43bc-4538-aa66-afbad0301c43\bindhu_profile_photo_1788092670032.jpg'
+_src_img = r'C:\Users\Bindhu Shree KR\.gemini\antigravity-ide\brain\1a2ce856-43bc-4538-aa66-afbad0301c43\.user_uploaded\media_1788092851393.jpg'
 _dst_img = os.path.join(os.path.dirname(__file__), 'static', 'profile.jpg')
-if os.path.exists(_src_img) and not os.path.exists(_dst_img):
+if os.path.exists(_src_img):
     shutil.copyfile(_src_img, _dst_img)
 
 # Structured portfolio profile data
@@ -238,9 +240,16 @@ def download_resume():
     )
 
 
-@app.route('/contact', methods=['POST'])
+@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/api/contact', methods=['GET', 'POST'])
 def contact():
     """Handles contact form submissions with validation and returns JSON."""
+    if request.method == 'GET':
+        return jsonify({
+            "status": "ready",
+            "message": "Contact API endpoint is active. Please send a POST request with name, email, and message."
+        }), 200
+
     if request.is_json:
         payload = request.get_json() or {}
     else:

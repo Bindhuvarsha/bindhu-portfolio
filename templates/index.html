@@ -26,8 +26,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f172a'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='42' fill='%2338bdf8'>BS</text></svg>">
 </head>
 <body>
-    <!-- Background Animated Gradient Mesh and Circuit Grid -->
-    <div class="bg-grid-pattern" aria-hidden="true"></div>
+    <!-- Background Ambient Glows -->
     <div class="ambient-glow glow-1" aria-hidden="true"></div>
     <div class="ambient-glow glow-2" aria-hidden="true"></div>
     <div class="ambient-glow glow-3" aria-hidden="true"></div>
@@ -36,32 +35,45 @@
     <header class="site-header" id="site-header">
         <div class="container nav-container">
             <a href="#hero" class="brand-logo" aria-label="Bindhu Shree K.R Homepage">
-                <span class="logo-symbol">&lt;BS/&gt;</span>
-                <span class="logo-text">Bindhu Shree <span class="accent-text">K.R</span></span>
+                <div class="logo-box">
+                    <span class="logo-icon">&gt;_</span>
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-name">Bindhu Shree K.R.</span>
+                    <span class="logo-role"><span class="status-indicator-dot"></span>Backend Dev</span>
+                </div>
             </a>
 
             <nav class="main-nav" id="main-nav" aria-label="Main Navigation">
-                <ul class="nav-list">
-                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                <ul class="nav-list nav-pill-wrapper">
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#skills" class="nav-link">Skills</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#education" class="nav-link">Education</a></li>
                     <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
                     <li><a href="#leadership" class="nav-link">Leadership</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
 
             <div class="nav-actions">
-                <a href="{{ url_for('download_resume') }}" class="btn btn-sm btn-outline-cyan" id="nav-resume-btn" download>
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                <a href="{{ url_for('download_resume') }}" class="btn btn-nav-resume" id="nav-resume-btn" download>
+                    <svg class="icon-nav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
                     </svg>
                     <span>Resume</span>
+                </a>
+                <a href="#contact" class="btn btn-nav-contact" id="nav-contact-btn">
+                    <svg class="icon-nav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <span>Get in Touch</span>
                 </a>
                 <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="main-nav">
                     <span class="bar"></span>
@@ -76,129 +88,196 @@
         <!-- 1. Hero Section -->
         <section class="section hero-section" id="hero">
             <div class="container hero-grid">
+                <!-- Left Column: Bio & Profile Info -->
                 <div class="hero-content reveal-item">
-                    <div class="hero-header-badge-row">
-                        <div class="hero-avatar-wrap">
-                            <img src="{{ url_for('static', filename='profile.jpg') }}" alt="{{ data.profile.name }} Portrait" class="hero-avatar-img">
-                            <span class="hero-avatar-status" title="Available for hire"></span>
+                    <div class="hero-identity-row">
+                        <div class="hero-avatar-ring">
+                            <img src="{{ url_for('static', filename='profile.jpg') }}" alt="{{ data.profile.name }}" class="hero-avatar-img">
+                            <span class="avatar-live-indicator" title="Available for Roles"></span>
                         </div>
-                        <div class="status-badge">
-                            <span class="status-dot"></span>
-                            <span>Available for Opportunities &bull; Bangalore, KA</span>
+                        <div class="hero-status-stack">
+                            <div class="badge-capsule badge-intern">
+                                <span class="badge-dot dot-green"></span>
+                                <span>Backend Intern @ AES Company &bull; VTU Student</span>
+                            </div>
+                            <div class="badge-capsule-sub">
+                                <span class="badge-dot dot-green"></span>
+                                <span>Available for Roles &bull; Bangalore, Karnataka</span>
+                            </div>
                         </div>
                     </div>
 
-                    <h1 class="hero-title">
-                        Hi, I'm <span class="gradient-text">{{ data.profile.name }}</span>
+                    <h1 class="hero-title-main">
+                        Hi, I'm <span class="hero-name-highlight">Bindhu Shree K.R.</span>
                     </h1>
-                    
-                    <h2 class="hero-subtitle">
-                        <span class="code-bracket">&lt;</span>{{ data.profile.role }}<span class="code-bracket">/&gt;</span>
-                    </h2>
 
-                    <p class="hero-description">
-                        {{ data.profile.short_bio }} Currently interning at <strong class="text-white">AES Company</strong> and pursuing Information Science Engineering at <strong class="text-white">Gopalan College of Engineering & Management (VTU)</strong>.
+                    <div class="hero-badge-role">
+                        <span class="bolt-icon">⚡</span>
+                        <span>Python &amp; Java Engineer</span>
+                    </div>
+
+                    <p class="hero-tagline">
+                        Building reliable backend systems and intelligent digital experiences with Python, Java, SQL, AWS, and machine learning.
                     </p>
 
-                    <div class="hero-cta-group">
-                        <a href="#projects" class="btn btn-primary" id="hero-work-btn">
-                            <span>View My Work</span>
-                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
+                    <p class="hero-detailed-bio">
+                        Information Science and Engineering student at Gopalan College of Engineering and Management (VTU). Currently gaining hands-on backend development experience as an intern at AES Company, designing RESTful APIs, optimizing SQL databases, and developing intelligent software solutions.
+                    </p>
+
+                    <div class="hero-info-chips">
+                        <div class="info-chip">
+                            <svg class="chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span>Bangalore, Karnataka, India</span>
+                        </div>
+                        <div class="info-chip">
+                            <svg class="chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span>{{ data.profile.email }}</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions-row">
+                        <a href="#projects" class="btn btn-gradient-hero" id="hero-projects-btn">
+                            <span>View My Projects</span>
+                            <span class="btn-arrow-icon">&rarr;</span>
                         </a>
-                        <a href="#contact" class="btn btn-secondary" id="hero-contact-btn">
-                            <span>Contact Me</span>
-                        </a>
-                        <a href="{{ url_for('download_resume') }}" class="btn btn-glass" id="hero-resume-btn" download>
-                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <a href="{{ url_for('download_resume') }}" class="btn btn-outline-hero" id="hero-download-btn" download>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                 <polyline points="7 10 12 15 17 10"></polyline>
                                 <line x1="12" y1="15" x2="12" y2="3"></line>
                             </svg>
                             <span>Download Resume</span>
                         </a>
+                        <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="btn btn-linkedin-hero" id="hero-linkedin-btn">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                            </svg>
+                            <span>Connect on LinkedIn</span>
+                        </a>
                     </div>
 
-                    <div class="hero-quick-meta">
-                        <div class="meta-item">
-                            <span class="meta-icon">&gt;_</span>
-                            <span class="meta-text">Python &bull; Java &bull; SQL &bull; REST</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-icon">&#9729;</span>
-                            <span class="meta-text">AWS S3 &bull; DynamoDB &bull; API Gateway</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-icon">&#9889;</span>
-                            <span class="meta-text">ML &bull; NLP &bull; Deep Learning</span>
+                    <div class="hero-quick-profiles">
+                        <span class="quick-profiles-label">Quick Profiles:</span>
+                        <div class="quick-icons-group">
+                            <a href="{{ data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="quick-icon-btn" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                            </a>
+                            <a href="{{ data.profile.github }}" target="_blank" rel="noopener noreferrer" class="quick-icon-btn" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                            </a>
+                            <a href="mailto:{{ data.profile.email }}" class="quick-icon-btn" aria-label="Email">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Abstract CSS Technology & Code Graphic -->
-                <div class="hero-visual reveal-item" aria-label="Abstract interactive tech graphic">
-                    <div class="tech-card-wrapper">
-                        <div class="tech-floating-pill pill-top">
-                            <span class="pill-badge pill-green">STATUS: ACTIVE</span>
-                            <span class="pill-text">REST API v2.4 🟢</span>
-                        </div>
-                        
-                        <div class="tech-terminal-card">
-                            <div class="terminal-header">
-                                <div class="terminal-dots">
-                                    <span class="dot red"></span>
-                                    <span class="dot yellow"></span>
-                                    <span class="dot green"></span>
-                                </div>
-                                <div class="terminal-title">bindhu_engineer.py</div>
-                                <div class="terminal-lang">Python 3.12</div>
+                <!-- Right Column: Interactive Code Sandbox & Stats Mockup -->
+                <div class="hero-visual reveal-item" aria-label="Interactive backend inspector code mockup">
+                    <!-- Top Tech Floating Tags Row -->
+                    <div class="tech-tags-top-row">
+                        <span class="floating-tech-pill tech-pill-blue">
+                            <span class="tech-symbol">&lt;/&gt;</span> FastAPI / Python
+                        </span>
+                        <span class="floating-tech-pill tech-pill-green">
+                            <span class="tech-symbol">&#128190;</span> SQL &amp; DynamoDB
+                        </span>
+                        <span class="floating-tech-pill tech-pill-amber">
+                            <span class="tech-symbol">&#9729;</span> AWS S3
+                        </span>
+                    </div>
+
+                    <!-- IDE Mockup Sandbox Window -->
+                    <div class="code-editor-mockup" id="code-sandbox">
+                        <div class="editor-titlebar">
+                            <div class="window-controls">
+                                <span class="win-dot dot-close"></span>
+                                <span class="win-dot dot-min"></span>
+                                <span class="win-dot dot-max"></span>
                             </div>
-                            
-                            <div class="terminal-body">
-                                <div class="code-line"><span class="line-no">01</span><span class="token-keyword">class</span> <span class="token-class">BackendMLEngineer</span>:</div>
-                                <div class="code-line"><span class="line-no">02</span>    <span class="token-keyword">def</span> <span class="token-func">__init__</span>(<span class="token-param">self</span>):</div>
-                                <div class="code-line"><span class="line-no">03</span>        <span class="token-param">self</span>.name = <span class="token-string">"Bindhu Shree K.R"</span></div>
-                                <div class="code-line"><span class="line-no">04</span>        <span class="token-param">self</span>.location = <span class="token-string">"Bangalore, India"</span></div>
-                                <div class="code-line"><span class="line-no">05</span>        <span class="token-param">self</span>.stack = [<span class="token-string">"Python"</span>, <span class="token-string">"SQL"</span>, <span class="token-string">"AWS"</span>, <span class="token-string">"NLP"</span>]</div>
-                                <div class="code-line"><span class="line-no">06</span>        <span class="token-param">self</span>.internship = <span class="token-string">"AES Company"</span></div>
-                                <div class="code-line"><span class="line-no">07</span></div>
-                                <div class="code-line"><span class="line-no">08</span>    <span class="token-keyword">def</span> <span class="token-func">build_impactful_systems</span>(<span class="token-param">self</span>):</div>
-                                <div class="code-line"><span class="line-no">09</span>        <span class="token-keyword">return</span> {</div>
-                                <div class="code-line"><span class="line-no">10</span>            <span class="token-string">"scalability"</span>: <span class="token-bool">True</span>,</div>
-                                <div class="code-line"><span class="line-no">11</span>            <span class="token-string">"intelligent_ai"</span>: <span class="token-bool">True</span>,</div>
-                                <div class="code-line"><span class="line-no">12</span>            <span class="token-string">"eager_to_learn"</span>: <span class="token-number">100</span>%</div>
-                                <div class="code-line"><span class="line-no">13</span>        }</div>
-                                <div class="code-line live-execution">
-                                    <span class="prompt-arrow">&gt;&gt;&gt;</span> <span class="typing-text">engineer.build_impactful_systems()</span>
-                                </div>
-                                <div class="code-output">
-                                    <span class="output-success">&#10003; 200 OK — Ready to deploy real-world solutions.</span>
-                                </div>
+                            <div class="editor-filename" id="editor-filename">backend-inspector.py</div>
+                            <div class="editor-actions">
+                                <button class="btn-editor-run" id="btn-run-test" title="Simulate Endpoint Execution">
+                                    <span class="play-icon">&#9654;</span> Run Test
+                                </button>
+                                <button class="btn-editor-copy" id="btn-copy-code" title="Copy Code Snippet">
+                                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    <span id="copy-text">Copy</span>
+                                </button>
                             </div>
                         </div>
 
-                        <div class="tech-floating-pill pill-bottom">
-                            <span class="pill-badge pill-purple">NLP &amp; ML</span>
-                            <span class="pill-text">AI Diagnostic Engine &bull; 99.4% Uptime</span>
+                        <div class="editor-tabs-bar">
+                            <button class="editor-tab active" data-tab="fastapi">
+                                <span class="tab-icon">&gt;_</span> Python REST API
+                            </button>
+                            <button class="editor-tab" data-tab="sql">
+                                <span class="tab-icon">&#128190;</span> SQL Query
+                            </button>
+                            <button class="editor-tab" data-tab="aws">
+                                <span class="tab-icon">&#9729;</span> AWS DynamoDB
+                            </button>
                         </div>
 
-                        <div class="tech-stats-glass">
-                            <div class="stat-mini">
-                                <span class="stat-mini-num">7.65</span>
-                                <span class="stat-mini-label">CGPA (B.E)</span>
+                        <div class="editor-code-body">
+                            <pre class="code-pre" id="code-display"><code><span class="code-comment"># Python Backend - RESTful Healthcare Chatbot Endpoint</span>
+<span class="code-keyword">from</span> <span class="code-lib">fastapi</span> <span class="code-keyword">import</span> FastAPI, HTTPException, status
+<span class="code-keyword">from</span> <span class="code-lib">pydantic</span> <span class="code-keyword">import</span> BaseModel
+<span class="code-keyword">from</span> <span class="code-lib">nlp_engine</span> <span class="code-keyword">import</span> analyze_symptoms, detect_emergency
+
+app = FastAPI(title=<span class="code-string">"Healthcare Assist API"</span>, version=<span class="code-string">"1.0.0"</span>)
+
+<span class="code-keyword">class</span> <span class="code-class">HealthQuery</span>(BaseModel):
+    user_id: <span class="code-type">str</span>
+    symptoms: <span class="code-type">list[str]</span>
+    language: <span class="code-type">str</span> = <span class="code-string">"en"</span>
+
+<span class="code-decorator">@app.post</span>(<span class="code-string">"/api/v1/triage"</span>, status_code=status.HTTP_200_OK)
+<span class="code-keyword">async def</span> <span class="code-func">triage_symptoms</span>(query: HealthQuery):
+    <span class="code-keyword">if</span> detect_emergency(query.symptoms):
+        <span class="code-keyword">return</span> {<span class="code-string">"status"</span>: <span class="code-string">"EMERGENCY"</span>, <span class="code-string">"action"</span>: <span class="code-string">"ALERT_DISPATCH"</span>}
+    result = <span class="code-keyword">await</span> analyze_symptoms(query.symptoms, query.language)
+    <span class="code-keyword">return</span> {<span class="code-string">"status"</span>: <span class="code-string">"SUCCESS"</span>, <span class="code-string">"guidance"</span>: result}</code></pre>
+                        </div>
+
+                        <!-- Live execution simulation drawer -->
+                        <div class="editor-output-drawer" id="editor-output" style="display: none;">
+                            <div class="output-header">
+                                <span class="output-dot dot-green"></span>
+                                <span>Test Execution Output (HTTP 200 OK &bull; 14.2ms)</span>
+                                <button class="output-close-btn" id="close-output" aria-label="Close Output">&times;</button>
                             </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-mini">
-                                <span class="stat-mini-num">8+</span>
-                                <span class="stat-mini-label">Certifications</span>
+                            <div class="output-body">
+                                <code>{ "status": "SUCCESS", "triage_score": 0.94, "emergency_detected": false, "timestamp": "2026-08-30T19:43:00Z" }</code>
                             </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-mini">
-                                <span class="stat-mini-num">3x</span>
-                                <span class="stat-mini-label">Class Rep</span>
+                        </div>
+
+                        <div class="editor-progress-glow"></div>
+
+                        <div class="editor-statusbar">
+                            <div class="status-left">
+                                <span class="status-indicator-dot"></span>
+                                <span>AES Internship Backend Sandbox</span>
                             </div>
+                            <div class="status-right">
+                                <span>UTF-8 &bull; Python 3.11</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3-Card Bottom Metrics Row -->
+                    <div class="hero-stats-cards-grid">
+                        <div class="stat-glass-card">
+                            <div class="stat-number-lg stat-color-purple">7.65 / 10</div>
+                            <div class="stat-title-label">Engineering CGPA</div>
+                        </div>
+                        <div class="stat-glass-card">
+                            <div class="stat-number-lg stat-color-lavender">8+</div>
+                            <div class="stat-title-label">Certifications</div>
+                        </div>
+                        <div class="stat-glass-card">
+                            <div class="stat-number-lg stat-color-cyan">Backend &amp; ML</div>
+                            <div class="stat-title-label">Core Focus</div>
                         </div>
                     </div>
                 </div>
@@ -654,7 +733,6 @@
         <div class="container footer-content">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <span class="logo-symbol">&lt;BS/&gt;</span>
                     <span class="footer-name">{{ data.profile.name }}</span>
                     <p class="footer-tagline">{{ data.profile.role }} &bull; Bangalore, Karnataka</p>
                 </div>

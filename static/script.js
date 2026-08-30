@@ -271,4 +271,188 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // --------------------------------------------------------------------------
+  // 6. INTERACTIVE IDE CODE SANDBOX & TAB SWITCHER
+  // --------------------------------------------------------------------------
+  const codeSnippets = {
+    fastapi: {
+      filename: 'backend-inspector.py',
+      code: `<span class="code-comment"># Python Backend - RESTful Healthcare Chatbot Endpoint</span>
+<span class="code-keyword">from</span> <span class="code-lib">fastapi</span> <span class="code-keyword">import</span> FastAPI, HTTPException, status
+<span class="code-keyword">from</span> <span class="code-lib">pydantic</span> <span class="code-keyword">import</span> BaseModel
+<span class="code-keyword">from</span> <span class="code-lib">nlp_engine</span> <span class="code-keyword">import</span> analyze_symptoms, detect_emergency
+
+app = FastAPI(title=<span class="code-string">"Healthcare Assist API"</span>, version=<span class="code-string">"1.0.0"</span>)
+
+<span class="code-keyword">class</span> <span class="code-class">HealthQuery</span>(BaseModel):
+    user_id: <span class="code-type">str</span>
+    symptoms: <span class="code-type">list[str]</span>
+    language: <span class="code-type">str</span> = <span class="code-string">"en"</span>
+
+<span class="code-decorator">@app.post</span>(<span class="code-string">"/api/v1/triage"</span>, status_code=status.HTTP_200_OK)
+<span class="code-keyword">async def</span> <span class="code-func">triage_symptoms</span>(query: HealthQuery):
+    <span class="code-keyword">if</span> detect_emergency(query.symptoms):
+        <span class="code-keyword">return</span> {<span class="code-string">"status"</span>: <span class="code-string">"EMERGENCY"</span>, <span class="code-string">"action"</span>: <span class="code-string">"ALERT_DISPATCH"</span>}
+    result = <span class="code-keyword">await</span> analyze_symptoms(query.symptoms, query.language)
+    <span class="code-keyword">return</span> {<span class="code-string">"status"</span>: <span class="code-string">"SUCCESS"</span>, <span class="code-string">"guidance"</span>: result}`,
+      raw: `# Python Backend - RESTful Healthcare Chatbot Endpoint
+from fastapi import FastAPI, HTTPException, status
+from pydantic import BaseModel
+from nlp_engine import analyze_symptoms, detect_emergency
+
+app = FastAPI(title="Healthcare Assist API", version="1.0.0")
+
+class HealthQuery(BaseModel):
+    user_id: str
+    symptoms: list[str]
+    language: str = "en"
+
+@app.post("/api/v1/triage", status_code=status.HTTP_200_OK)
+async def triage_symptoms(query: HealthQuery):
+    if detect_emergency(query.symptoms):
+        return {"status": "EMERGENCY", "action": "ALERT_DISPATCH"}
+    result = await analyze_symptoms(query.symptoms, query.language)
+    return {"status": "SUCCESS", "guidance": result}`,
+      output: `{ "status": "SUCCESS", "triage_score": 0.94, "emergency_detected": false, "latency_ms": 14.2 }`
+    },
+    sql: {
+      filename: 'query-optimizer.sql',
+      code: `<span class="code-comment">-- Optimized Multi-Table Patient Index &amp; Triage Lookup</span>
+<span class="code-keyword">EXPLAIN ANALYZE</span>
+<span class="code-keyword">SELECT</span> 
+    p.patient_id,
+    p.full_name,
+    COUNT(t.triage_id) <span class="code-keyword">AS</span> total_visits,
+    MAX(t.created_at) <span class="code-keyword">AS</span> last_triage_timestamp
+<span class="code-keyword">FROM</span> patients p
+<span class="code-keyword">INNER JOIN</span> triage_records t <span class="code-keyword">ON</span> p.patient_id = t.patient_id
+<span class="code-keyword">WHERE</span> t.emergency_status = <span class="code-string">'CLEARED'</span>
+  <span class="code-keyword">AND</span> t.created_at &gt;= NOW() - <span class="code-keyword">INTERVAL</span> <span class="code-string">'30 days'</span>
+<span class="code-keyword">GROUP BY</span> p.patient_id, p.full_name
+<span class="code-keyword">ORDER BY</span> last_triage_timestamp <span class="code-keyword">DESC</span>
+<span class="code-keyword">LIMIT</span> 25;`,
+      raw: `-- Optimized Multi-Table Patient Index & Triage Lookup
+EXPLAIN ANALYZE
+SELECT 
+    p.patient_id,
+    p.full_name,
+    COUNT(t.triage_id) AS total_visits,
+    MAX(t.created_at) AS last_triage_timestamp
+FROM patients p
+INNER JOIN triage_records t ON p.patient_id = t.patient_id
+WHERE t.emergency_status = 'CLEARED'
+  AND t.created_at >= NOW() - INTERVAL '30 days'
+GROUP BY p.patient_id, p.full_name
+ORDER BY last_triage_timestamp DESC
+LIMIT 25;`,
+      output: `[Query Plan] Index Scan using idx_triage_date on triage_records (cost=0.42..8.45 rows=25 width=48) (actual time=0.042..1.185 rows=25 loops=1) Execution Time: 1.28 ms`
+    },
+    aws: {
+      filename: 'dynamodb_service.py',
+      code: `<span class="code-comment"># AWS Boto3 Serverless DynamoDB Async Session Store</span>
+<span class="code-keyword">import</span> boto3
+<span class="code-keyword">from</span> botocore.exceptions <span class="code-keyword">import</span> ClientError
+
+dynamodb = boto3.resource(<span class="code-string">'dynamodb'</span>, region_name=<span class="code-string">'ap-south-1'</span>)
+table = dynamodb.Table(<span class="code-string">'HealthcareChatSessions'</span>)
+
+<span class="code-keyword">def</span> <span class="code-func">persist_chat_session</span>(session_id: <span class="code-type">str</span>, metadata: <span class="code-type">dict</span>):
+    <span class="code-keyword">try</span>:
+        response = table.put_item(
+            Item={
+                <span class="code-string">'SessionId'</span>: session_id,
+                <span class="code-string">'TriageHistory'</span>: metadata,
+                <span class="code-string">'TTL'</span>: 1735689600
+            }
+        )
+        <span class="code-keyword">return</span> response[<span class="code-string">'ResponseMetadata'</span>][<span class="code-string">'HTTPStatusCode'</span>] == 200
+    <span class="code-keyword">except</span> ClientError <span class="code-keyword">as</span> e:
+        <span class="code-keyword">raise</span> RuntimeError(f<span class="code-string">"DynamoDB write failed: {e}"</span>)`,
+      raw: `# AWS Boto3 Serverless DynamoDB Async Session Store
+import boto3
+from botocore.exceptions import ClientError
+
+dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
+table = dynamodb.Table('HealthcareChatSessions')
+
+def persist_chat_session(session_id: str, metadata: dict):
+    try:
+        response = table.put_item(
+            Item={
+                'SessionId': session_id,
+                'TriageHistory': metadata,
+                'TTL': 1735689600
+            }
+        )
+        return response['ResponseMetadata']['HTTPStatusCode'] == 200
+    except ClientError as e:
+        raise RuntimeError(f"DynamoDB write failed: {e}")`,
+      output: `AWS DynamoDB PutItem 200 OK | ConsumedCapacity: 1.0 WCU | SessionId: "sess_99a81f" persisted successfully.`
+    }
+  };
+
+  const editorTabs = document.querySelectorAll('.editor-tab');
+  const editorFilename = document.getElementById('editor-filename');
+  const codeDisplay = document.getElementById('code-display');
+  const btnRunTest = document.getElementById('btn-run-test');
+  const btnCopyCode = document.getElementById('btn-copy-code');
+  const copyText = document.getElementById('copy-text');
+  const editorOutput = document.getElementById('editor-output');
+  const closeOutput = document.getElementById('close-output');
+
+  let currentTabKey = 'fastapi';
+
+  editorTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const tabKey = tab.getAttribute('data-tab');
+      if (!tabKey || !codeSnippets[tabKey]) return;
+
+      editorTabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentTabKey = tabKey;
+
+      const data = codeSnippets[tabKey];
+      if (editorFilename) editorFilename.textContent = data.filename;
+      if (codeDisplay) {
+        codeDisplay.innerHTML = `<code>${data.code}</code>`;
+      }
+      if (editorOutput) {
+        editorOutput.style.display = 'none';
+      }
+    });
+  });
+
+  if (btnRunTest) {
+    btnRunTest.addEventListener('click', () => {
+      if (!editorOutput) return;
+      const data = codeSnippets[currentTabKey];
+      const outputBody = editorOutput.querySelector('.output-body code');
+      if (outputBody) {
+        outputBody.textContent = data.output;
+      }
+      editorOutput.style.display = 'block';
+    });
+  }
+
+  if (closeOutput && editorOutput) {
+    closeOutput.addEventListener('click', () => {
+      editorOutput.style.display = 'none';
+    });
+  }
+
+  if (btnCopyCode) {
+    btnCopyCode.addEventListener('click', async () => {
+      const data = codeSnippets[currentTabKey];
+      try {
+        await navigator.clipboard.writeText(data.raw);
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          if (copyText) copyText.textContent = 'Copy';
+        }, 2000);
+      } catch (err) {
+        console.error('Clipboard copy failed:', err);
+      }
+    });
+  }
 });
